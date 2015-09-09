@@ -1,0 +1,54 @@
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">Manage Templates</h4>
+                    <div ng-include="'template/common/error.html'"></div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                     <!--    Hover Rows  -->
+                    <div class="panel panel-default">
+                        <!--
+                        <div class="panel-heading">
+                            Hover Rows
+                        </div>
+                        -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Template Name</th>
+                                            <th>Template Kind</th>
+                                            <th>Template Status</th>
+                                            <th>Detail View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="data in templateList">
+                                            <td>{{data.template_id}}</td>
+                                            <td>{{data.template_name}}</td>
+                                            <td>{{data.template_kind}}</td>
+                                            <td>{{data.template_status}}</td>
+                                            <td>
+                                            <a href="#/template-detail/{{data.template_id}}" class="btn btn-success btn-xs">VIEW</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End  Hover Rows  -->
+                </div>
+            </div>
+
+            <a class="btn btn-success" href="#/template-detail/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new Template</a>
+        </div>
+    </div>
+

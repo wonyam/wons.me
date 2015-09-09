@@ -1,0 +1,39 @@
+﻿    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">Manage Users</h4>
+                    <div ng-include="'template/common/error.html'"></div>
+
+                </div>
+
+            </div>
+            <div class="row">
+            <form name="form" ng-submit="vm.login()" role="form">
+                <div class="col-md-6">
+                    <br />
+                        <label>Login ID : </label>
+                        <span>{{detailData.user_login}}</span>
+                        <hr>
+                        <label>Name : </label>
+                        <span>{{detailData.user_firstname}} {{detailData.user_lastname}}</span>
+                        <hr>
+
+                        <label >Enter New Password :  </label>
+                        <input type="password" name="password" id="password"  class="form-control" placeholder="Input your password" ng-model="detailData.user_pass" required />
+                        <span  ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+
+                        <hr />
+                        <button ng-click="savePass(detailData);" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Save</button>
+
+                        <button class="btn btn-danger" ng-click="cancle()"><i class="fa fa-cancle"></i> Cancle</button>
+
+
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+
+            </form>
+            </div>
+        </div>
+    </div>

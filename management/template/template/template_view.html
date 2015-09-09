@@ -1,0 +1,54 @@
+﻿    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">Manage Templates</h4>
+                    <div ng-include="'template/common/error.html'"></div>
+
+                </div>
+                
+            </div>
+            <div class="row">
+            <form name="form" role="form">
+                <div class="col-md-6">
+                    <br />
+                        <label>Kind : </label>
+                        <select ng-model="templateDetailData.template_kind" class= "form-control" required >
+                          <option value="PA">Page</option>
+                          <option value="PO">Portfolio</option>
+                          <option value="CA">Career</option>
+                          <option value="CO">Contact</option>
+                        </select>
+
+                        <label>Template Name : </label>
+                        <input type="text" name="template_name" id="template_name" class="form-control" ng-model="templateDetailData.template_name" placeholder="Input template name" required />
+                        <span ng-show="form.template_name.$dirty && form.template_name.$error.required" class="help-block">Template name is required</span>
+
+                </div>
+
+                <div class="col-md-6">
+                    <br />
+                        <label>Template Url : </label>
+                        <input type="text" name="template_url" id="template_url" class="form-control" ng-model="templateDetailData.template_url" placeholder="Input Template url" required />
+                        <span ng-show="form.template_url.$dirty && form.template_url.$error.required" class="help-block">Template url is required</span>
+
+                        <label>Status : </label>
+                        <select ng-model="templateDetailData.template_status" class= "form-control" required >
+                          <option value="0">Activate</option>
+                          <option value="9">Deactivate</option>
+                        </select>
+
+                        <hr />
+                        <button ng-click="saveTemplate(templateDetailData);" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Save Information</button>
+
+                        <button class="btn btn-danger" ng-show="_template_id" ng-click="deleteTemplate(_template_id)"><i class="fa fa-pencil"></i> Delete</button>
+                        <button class="btn btn-danger" ng-click="cancle()"><i class="fa fa-cancle"></i> Cancle</button>
+
+                </div>
+
+                <div class="form-group" ng-class="{ 'has-error': form.template_name.$dirty && form.template_name.$error.required }">
+
+            </form>
+            </div>
+        </div>
+    </div>

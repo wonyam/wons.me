@@ -1,0 +1,59 @@
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">Manage Users</h4>
+                    <div ng-include="'template/common/error.html'"></div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                     <!--    Hover Rows  -->
+                    <div class="panel panel-default">
+                        <!--
+                        <div class="panel-heading">
+                            Hover Rows
+                        </div>
+                        -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User Id</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Status</th>
+                                            <th>Detail View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr ng-repeat="data in userlist | orderBy:data.ID:reverse">-->
+                                        <tr ng-repeat="data in userlist">
+                                            <td>{{data.ID}}</td>
+                                            <td>{{data.user_login}}</td>
+                                            <td>{{data.user_firstname}} {{data.user_lastname}}</td>
+                                            <td>{{data.user_email}}</td>
+                                            <td>{{data.user_status}}</td>
+                                            <td>
+                                            <a href="#/user-detail/{{data.ID}}" class="btn btn-success btn-xs">VIEW</a>
+                                            <a href="#/user-pass/{{data.ID}}" class="btn btn-success btn-xs">PASSWORD</a>
+                                            <a href="#/user-site/{{data.ID}}" class="btn btn-success btn-xs">SITE</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End  Hover Rows  -->
+                </div>
+            </div>
+
+            <a class="btn btn-success" href="#/user-detail/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new Customer</a>
+        </div>
+    </div>
+

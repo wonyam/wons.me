@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title>Test </title>
+        <script src="../../js/angular/angular.min.js"></script>
+        <script src="../../js/angular/angular-route.min.js"></script>
+        <script>
+            var app = angular.module('app', ['ngRoute']);
+
+            app.config(function($routeProvider) {
+                $routeProvider.
+                    when('/', {
+                        templateUrl: 'one.html',
+                        controller: 'oneCtrl'
+                    }).
+                    when('/login', {
+                        templateUrl: 'two.html',
+                        controller: 'twoCtrl'
+                    }).
+                    otherwise({
+                        redirectTo: '/'
+                    })
+            });
+
+            app.factory('indexfac', function($http) {
+                return {
+                    onefac: function(callback) {
+                        alert(1);
+                    },
+                    twofac: function(callback) {
+                        alert(2);
+                    }
+                }
+            });
+
+            app.controller('oneCtrl', function($scope, indexfac) {
+                indexfac.onfac(function(onefac) {
+                    $scope.onefac = onefac;
+                });
+            });
+
+            app.controller('twoCtrl', function($scope, indexfac) {
+                indexfac.twofac(function(twofac) {
+                    $scope.twofac = twofac;
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div>Top</div>
+        <div ng-view></div>
+        <div>Bottom</div>
+    </body>
+</html>

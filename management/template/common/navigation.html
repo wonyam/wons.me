@@ -1,0 +1,26 @@
+    <!-- LOGO HEADER END-->
+    <section class="menu-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="navbar-collapse collapse ">
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li><a class="menu-top-active" href="index.html">Dashboard</a></li>
+                            <li ng-show="viewAmenu"><a href="#/user">Manage Users</a></li>
+                            <li ng-show="viewAmenu"><a href="#/template">Manage Templates</a></li>
+                            <li><a href="#/page">Manage Pages</a></li>
+                            <li><a href="#/upload">upload</a></li>
+                            <li ng-show="viewLogin"><a href="#/login">Login Page</a></li>
+                            <li ng-show="viewLogout"><a href="#/" ng-click="actLogout()">Logout</a></li>
+                            <!--
+                            <li><a href="forms.html">Forms</a></li>
+                            <li><a href="blank.html">Blank Page</a></li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- MENU SECTION END-->
