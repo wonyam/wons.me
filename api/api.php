@@ -138,7 +138,7 @@
 		
 		private function deleteUser(){
 			if($this->get_request_method() != "DELETE"){
-				$this->response('',406);
+				$this->response('',206);
 			}
 			$id = (int)$this->_request['userid'];
 			
@@ -149,6 +149,34 @@
 				$user = new User();
 				$result = $user->deleteUser($id);
 				$this->response($this->json($result), 200);
+			} catch(Exception $e) {
+				$error = array('status' => "Failed", "msg" => $e->getMessage());
+				$this->response($this->json($error), 207);
+			}
+		}
+
+		private function insertUserSite() {
+			if($this->get_request_method() != "POST") {
+				$this->response('', 206);
+			}
+
+			//$detailData = json_decode(file_get_contents("php://input"), true);
+
+			try {
+				$user = new User();
+				$result = $user->insertUserSite();
+				$this->response($this->json($result), 200);
+				
+				/*
+                $target_dir = "uploads/";
+
+                $target_file = $target_dir . basename($_FILES["file"]["name"]);
+
+                move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+
+                throw new Exception($target_file ."]");
+                */
+
 			} catch(Exception $e) {
 				$error = array('status' => "Failed", "msg" => $e->getMessage());
 				$this->response($this->json($error), 207);

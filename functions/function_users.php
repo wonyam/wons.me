@@ -196,6 +196,77 @@
                 throw $e;
             }
         }
+
+        function insertUserSite() {
+
+            try {
+                //uploadImage('file', '../uploads/');
+
+                $uploads = new Uploads();
+
+                $target_dir = "../uploads/";
+                $obj_name = 'file';
+
+                $target_file = $uploads->uploadImage($obj_name, $target_dir);
+
+
+                $column_names = array('user_id', 'site_url', 'site_css', 'site_head_title', 'site_head_subtitle', 'site_twitter', 'site_facebook', 'site_linkedin');
+
+               // $css = $_POST['site_css'];
+                $columns = '';
+                $values = '';
+                $arr_values = array();
+
+                foreach($column_names as $desired_key) {
+                    if(!isset($_POST[$desired_key])) {
+                        $$desired_key = "";
+                    } else {
+                        $$desired_key = $_POST[$desired_key];
+                    }
+                    $columns = $columns.$desired_key.',';
+                    $values = $values. " :$desired_key ,";
+                    array_push($arr_values, $$desired_key);
+                }
+
+                array_push($column_names, 'site_head_img');
+                array_push($arr_values, $target_file);
+
+                $columns = $columns.'site_head_img ,';
+                $values = $values. " :site_head_img ,";
+                
+                $query = "INSERT INTO sites (".trim($columns,',').") VALUES(".trim($values,',').")";
+
+               // throw new Exception($arr_values);
+
+                //throw new Exception(implode(',', $column_names) ."  |  ". implode(',', $arr_values));
+                
+                try {
+                    $db = getDB();
+                    $stmt = $db->prepare($query);
+                    for($i=0;$i<count($arr_values);$i++) {
+                        $stmt->bindParam($column_names[$i], $arr_values[$i]);
+                    } 
+
+                    $stmt->execute();
+
+                    $rowCount = $stmt->rowCount();
+                    $db = null;
+
+                } catch(FDOException $e) {
+                    throw $e;
+                }
+                
+                
+                //$site_css = $detailGetData['detailData']; 
+                //$site_title = $detailGetData['site_title'];
+
+                //throw new Exception($detailGetData ."  |  ". $css);
+            } catch(Exception $e) {
+                throw $e;
+            }
+
+        }
+
         /*
         function check_login() {
             $this->user = $username;

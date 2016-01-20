@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title></title>
+        <script src="../js/angular/angular.min.js"></script>
+        <script src="../js/angular/angular-file-upload.min.js"></script>
+        <script>
+            var app = angular.module('app', ['ngFileUpload']);
+
+            app.controller('PlayerController', function($scope, $http) {
+                alert("PlayerController");
+
+                /*
+                $scope.onFileSelect = function($files) {
+                    $scope.message = "";
+
+                    for(var i=0; i<$files.length;i++) {
+                        var file = $file[i];
+                        console.log(file);
+                        $scope.upload = $upload.upload({
+                            url: 'upload.php',
+                            method: 'POST',
+                            file: file
+                        }).success(function(data, status, headers, config) {
+                            $scope.message = data;
+                        }).error(function(data, status) {
+                            $scope.message = data;
+                        });
+                    }
+                };
+                */
+            });
+        </script>
+    </haed>
+    
+    <body ng-controller="PlayerController">
+        <div ng-show="newplayer.functie == 'update'">
+            <h3>Profile Pic</h3>
+            <div>
+                <input type="file" name="image" id="image" ng-file-select="onFileSelect($files)">
+                <br />
+                <span class="errorMsg">{{ message }}</span>
+            </div>
+        </div>
+    </body>
+</html>

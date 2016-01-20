@@ -13,14 +13,14 @@
                 <div class="col-md-6">
                     <br />
                         <label>Login ID : </label>
-                        {{USERID}}<br />
+                        {{userlogin}}<br />
 
                         <label>CSS :  </label>
                         <div class="css_table">
                             <div class="css_row">
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css0" ng-model="detailData.site_css" value="default" /> <label for="css0" class="css_label">Default</label>
+                                        <input type="radio" name="css" id="css0" ng-model="detailData.site_css" value="default" required /> <label for="css0" class="css_label">Default</label>
                                     </div>
                                     <div class="css_row">
                                         <div class="css_default01"></div><div class="css_default02"></div>
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css1" ng-model="detailData.site_css" value="yellowishgreen" /> <label for="css1" class="css_label">YellowishGreen</label>
+                                        <input type="radio" name="css" id="css1" ng-model="detailData.site_css" value="yellowishgreen" required /> <label for="css1" class="css_label">YellowishGreen</label>
                                     </div>
                                     <div class="css_row">
                                         <div class="css_yellowishgreen01"></div><div class="css_yellowishgreen02"></div>
@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css2" ng-model="detailData.site_css" value="mint" /> <label for="css2" class="css_label">Mint</label>
+                                        <input type="radio" name="css" id="css2" ng-model="detailData.site_css" value="mint" required /> <label for="css2" class="css_label">Mint</label>
                                     </div>
                                     <div class="css_row">
                                         <span class="css_mint01"></span><span class="css_mint02"></span>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css3" ng-model="detailData.site_css" value="purple" /> <label for="css3" class="css_label">Purple</label>
+                                        <input type="radio" name="css" id="css3" ng-model="detailData.site_css" value="purple" required /> <label for="css3" class="css_label">Purple</label>
                                     </div>
                                     <div class="css_row">
                                         <span class="css_purple01"></span><span class="css_purple02"></span>
@@ -54,7 +54,7 @@
                             <div class="css_row">
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css4" ng-model="detailData.site_css" value="blue" /> <label for="css4" class="css_label">Blue</label>
+                                        <input type="radio" name="css" id="css4" ng-model="detailData.site_css" value="blue" required /> <label for="css4" class="css_label">Blue</label>
                                     </div>
                                     <div class="css_row">
                                         <span class="css_blue01"></span><span class="css_blue02"></span>
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css5" ng-model="detailData.site_css" value="gray" /> <label for="css5" class="css_label">Gray</label>
+                                        <input type="radio" name="css" id="css5" ng-model="detailData.site_css" value="gray" required /> <label for="css5" class="css_label">Gray</label>
                                     </div>
                                     <div class="css_row">
                                         <span class="css_gray01"></span><span class="css_gray02"></span>
@@ -70,38 +70,38 @@
                                 </div>
                                 <div class="css_cell">
                                     <div class="css_row">
-                                        <input type="radio" name="css" id="css6" ng-model="detailData.site_css" value="orange" /> <label for="css6" class="css_label">Orange</label>
+                                        <input type="radio" name="css" id="css6" ng-model="detailData.site_css" value="orange" required /> <label for="css6" class="css_label">Orange</label>
                                     </div>
                                     <div class="css_row">
                                         <span class="css_orange01"></span><span class="css_orange02"></span>
                                     </div>
                                 </div>
                             </div>
-                                <span  ng-show="form.css.$dirty && form.css.$error.required && viewPass" class="help-block">Password is required</span>
 
                         </div>
 
-                        <span ng-show="form.css.$dirty && form.css.$error.required" class="help-block">First name is required</span>
+                        <span ng-show="form.css.$dirty && form.css.$error.required" class="help-block">CSS is required</span>
 
 
                         <label>Header Background-Image : </label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" ng-model="detailData.user_firstname" placeholder="Input first name" required />
-                        <span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block">First name is required</span>
+                        <input type="file" name="headerimg" id="headerimg" file-model="myFile" />
+                        <!--<input type="text" name="firstname" id="firstname" class="form-control" ng-model="detailData.user_firstname" placeholder="Input first name" required />
+                        <span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block">Header background-image is required</span>-->
 
                 </div>
 
                 <div class="col-md-6">
                     <br />
                         <label>Header Title : </label>
-                        <input type="text" name="title" id="title" class="form-control" ng-model="detailData.site_title" placeholder="Input site title" />
-                        <span ng-show="form.title.$dirty && form.title.$error.required" class="help-block">Last name is required</span>
+                        <input type="text" name="title" id="title" class="form-control" ng-model="detailData.site_head_title" placeholder="Input site title" />
+                        <span ng-show="form.title.$dirty && form.title.$error.required" class="help-block">Header title is required</span>
 
                         <label>Header Sub Title : </label>
-                        <input type="text" name="subtitle" id="subtitle" class="form-control" ng-model="detailData.site_subtitle" placeholder="Input site sub title" />
-                        <span ng-show="form.subtitle.$dirty && form.subtitle.$error.required" class="help-block">Last name is required</span>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control" ng-model="detailData.site_head_subtitle" placeholder="Input site sub title" />
+                        <span ng-show="form.subtitle.$dirty && form.subtitle.$error.required" class="help-block">Header sub title is required</span>
                         
                         <label>Twitter : </label>
-                        <input name="twitter" id="twitter" ng-model="detailData.site_twitter" type= "text" class= "form-control" placeholder="Enter Twitter url" required/>
+                        <input name="twitter" id="twitter" ng-model="detailData.site_twitter" type= "text" class= "form-control" placeholder="Enter Twitter url" />
                         
 
                         <label>Facebook : </label>
@@ -112,9 +112,9 @@
                         <input name="facebook" id="linkedin" ng-model="detailData.site_linkedin" class= "form-control" placeholder="Enter Linkedin url" />
 
                         <hr />
-                        <button ng-click="saveUser(detailData);" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Save Information</button>
+                        <button ng-click="saveUserSite(detailData);" ng-disabled="form.$invalid || dataLoading" class="btn btn-success">Save Information</button>
 
-                        <button class="btn btn-danger" ng-show="_userid" ng-click="deleteUser(_userid)"><i class="fa fa-pencil"></i> Delete</button>
+                        <button class="btn btn-danger" ng-show="_userid" ng-click="closeUserSite(_userid)"><i class="fa fa-pencil"></i> Close this site</button>
                         <button class="btn btn-danger" ng-click="cancle()"><i class="fa fa-cancle"></i> Cancle</button>
 
                 </div>

@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 
     var appFactories = angular.module('appFactories', []);
 
@@ -202,6 +202,22 @@
                     return results;
                 });
             };
+
+            obj.userSiteInsert = function(detailData) {
+                return $http.post(basefolder + 'insertUserSite', detailData, {
+                        withCredentials : false,
+                        transformRequest: angular.identity,
+                        headers: {'Content-Type': undefined}
+                    }).then(function(results) {
+                    return results;
+                });
+            };
+
+            obj.userSiteClose = function(detailData, action) {
+                return $http.post(basefolder + 'updateUserSite', {detailData:detailData, action:action}).then(function(results) {
+                    return results;
+                });
+            };
         return obj;
     }]);
 
@@ -239,7 +255,7 @@
         };
         return obj;
 
-    }]);
+    }]);  +
 
     appFactories.factory("manageFile", ['$http', function($http) {
         var obj = {};

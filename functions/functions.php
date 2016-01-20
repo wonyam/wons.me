@@ -77,4 +77,48 @@ class MCrypt
         return $value;
     }
 }
+ 
+class Uploads {   
+
+//    public $Uploads;
+
+    function uploadImage($obj_name, $target_dir) {
+
+        try {
+
+            $target_file = $target_dir . basename($_FILES[$obj_name]["name"]);
+
+            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+            // Check file size
+            if($_FILES["file"]["size"] > 1000000) {
+                throw new Exception("Sorry, your file is too large.");
+            }
+
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType !="gif") {
+                throw new Exception("Sorry, only JPG, JPEG, PNG & GIF files are allowed. The file type is ". $imageFileType .".");
+            }
+
+            // check if file already exists
+            if(file_exists($target_file)) {
+
+               // throw new Exception("Sorry, file already exists.");
+                
+                $temp = explode(".", $_FILES[$obj_name]["name"]);
+                $newfilename = round(microtime(true)) . '.' . end($temp);
+                //$target_file = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR .$newfilename;
+                $target_file =  $target_dir .$newfilename;
+                
+            }
+
+            move_uploaded_file($_FILES[$obj_name]["tmp_name"], $target_file);
+
+            return $target_file;
+
+        } catch(FDOException $e) {
+            throw $e;
+        }
+    }
+}
 ?>

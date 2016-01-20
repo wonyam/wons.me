@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Info of an ICT Student</title>
+        <style>
+            .table01 td:first-child {
+                color: blue;
+                font-weight: bold;
+            }
+
+            .table01 tr:nth-child(2n+1) {
+                background-color: #EFEFEF;
+            }
+
+            .table01 tr:nth-child(2n) {
+                background-color: #E8E8E8;
+            }
+        </style>
+        <script>
+            var httpRequest;
+
+            function makeRequest() {
+                var url = "json/student.json";
+
+                if(window.XMLHttpRequest) {     // Mozilla, Safari
+                    httpRequest = new XMLHttpRequest();
+                } else if(window.ActiveXObject) {
+                    try {
+                        httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch(e) {
+                        try {
+                            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                        } catch(e) {}
+                    }
+                }
+
+                if(!httpRequest) {
+                    alert("Problem to connect");
+                    return false;
+                }
+
+                httpRequest.onreadystatechange = showContents;
+                httpRequest.open('GET', url, true);
+                httpRequest.send();
+            }
+
+            function showContents() {
+                if(httpRequest.readyState === 4) {
+                    if(httpRequest.status === 200) {
+                        var jsObject = JSON.parse(httpRequest.responseText);
+
+                        var str = "<table class='table01'>";
+                            str += "<tr><td>Name</td><td>"+ jsObject.name +"</td></tr>";
+                            str += "<tr><td>Age</td><td>"+ jsObject.age +"</td></tr>";
+                            str += "<tr><td>Program</td><td>"+ jsObject.program +"</td></tr>";
+                            for (var i=0;i<jsObject.courses.length;i++) {
+                            str += "<tr><td>Course 1</td><td>"+ jsObject.courses[i] +"</td></tr>";
+                            }
+                            str += "</table>";
+
+                            document.getElementById("view").innerHTML = str;
+                    } else {
+                        alert("There was a problem with the request.");
+                    }
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>Info of an ICT Student</h1>
+
+        <div id="view"></div>
+
+        <input type="button" value="Make a Request" onclick="makeRequest()" />
+    </body>
+</html>

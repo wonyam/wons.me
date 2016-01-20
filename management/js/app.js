@@ -75,7 +75,7 @@
                     $rootScope.viewLogout   = "false";
                     $location.path('/login');
                 } else {
-                    $rootScope.USERID = status.data.user_info.user_login;
+                    //$rootScope.USERID = status.data.user_info.user_login;
                     $rootScope.viewLogin    = "false";
                     $rootScope.viewLogout   = "true";
                 }

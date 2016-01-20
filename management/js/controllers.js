@@ -93,6 +93,77 @@
         };
     });
 
+    /* for fileupload */
+    appControllers.directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+                
+                element.bind('change', function(){
+                    scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]);
+
+    appControllers.controller('userSiteCtrl', function($scope, $routeParams, $location, manageUser, handlerError) {
+        var userid = parseInt($routeParams.userid) ? ($routeParams.userid) : 0;
+
+        manageUser.getUserDetail(userid).then(function(response) {
+            $scope.userlogin = response.data.user_login;
+        });
+
+          var param = function(data) {
+                var returnString = '';
+                for (d in data){
+                    if (data.hasOwnProperty(d))
+                       returnString += d + '=' + data[d] + '&';
+                }
+                // Remove last ampersand and return
+                return returnString.slice( 0, returnString.length - 1 );
+          };
+
+        $scope.saveUserSite = function(detailData) {
+            var file = $scope.myFile;
+            var file_data = new FormData();
+            file_data.append('file',            file);
+            file_data.append('user_id',         userid);
+            for (d in detailData) {
+                if (detailData.hasOwnProperty(d)) {
+                    file_data.append(d,        detailData[d]);
+                }
+            }
+            //file_data.append('dData', param(detailData));
+            //file_data.append('detailData', angular.toJson(detailData));
+            //alert(detailData.site_css);
+            //alert(JSON.stringify(detailData));
+                //$scope.error_content = file;
+            manageUser.userSiteInsert(file_data).then(function(response) {
+                //$scope.error_content = response;
+                setData($scope, $location, '/user', response, handlerError);
+            });
+        };
+
+        $scope.cloaseUserSite = function(userid) {
+            if(confirm("Are you sure to close this site?")) {
+                manageUser.userSiteClose().then(function(response) {
+                    setData($scope, $location, '/usser', response, handlerError);
+                });
+            }
+        };
+
+        $scope.cancle = function() {
+            $location.path('/user');
+        };
+
+
+       // $scope.userlogin = userid;
+    });
+
     appControllers.controller('templateCtrl', function($scope, manageTemplate, handlerError) {
         manageTemplate.getTemplates().then(function(response) {
             setData($scope, '', 'templateList', response, handlerError);
@@ -137,9 +208,6 @@
     
     });
 
-    appControllers.controller('userSiteCtrl', function($scope, manageUser) {
-
-    });
 
     appControllers.controller('uploadCtrl', function($scope, FileUploader, manageFile) {
         
@@ -149,8 +217,9 @@
             //manageFile.sendfile()
 
         });
+
     
-        var uploader = $scope.uploader
+        //var uploader = $scope.uploader = manageFile.sendfile();
 
         // FILTERS
  
@@ -229,6 +298,7 @@
             //$scope.alldata = response;
         } else {
             handlerError.Error(response.data.msg);
+                //$scope.error_content = response;
         }
     }
 

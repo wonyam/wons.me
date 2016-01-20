@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Get data from Json file 02</title>
+
+        <style>
+            body {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            .table_st tr:first-child {
+                color:blue;
+                font-weight: bold;
+            }
+
+            .table_st tr:nth-child(2n+1) {
+                background-color:#D8D8D8;
+            }
+
+            .table_st tr:nth-child(2n) {
+                background-color:#F0F0F0;
+            }
+        </style>
+
+        <script>
+            var httpRequest;
+
+            function makeRequest() {
+                var url = "json/nationArray.json";
+
+                if(window.XMLHttpRequest) {
+                    httpRequest = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {  //IE
+                    try {
+                        httpRequest = new ActiveXObject("Msxml12.XMLHTTP");
+                    } catch(e) {
+                        try {
+                            httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                        } catch(e) { }
+                    }
+                }
+
+                if (!httpRequest) {
+                    alert("Cannot create an XMLHTTP instance");
+                    return false;
+                }
+
+                httpRequest.onreadystatechange = showContents;
+                httpRequest.open('post', url, true);
+                httpRequest.send();
+            }
+
+            function showContents() {
+                //alert(httpRequest.readyState);
+
+
+                if(httpRequest.readyState === 4) {
+                    if(httpRequest.status === 200) {
+                        var jsArray = JSON.parse(httpRequest.responseText);
+
+                        var viewTable = document.getElementById("viewTable");
+                        var table = "<table class='table_st'>";
+                            table += "<tr><td>Official Name</td><td>Address</td><td>Postal Code</td><td>Latitude</td><td>Longitude</td><td>Community Site</td></tr>";
+                            for(i=0; i<jsArray.length;i++) {
+                                table += "<tr><td>"+jsArray[i].OfficialName+"</td><td>"+jsArray[i].Address+"</td><td>"+jsArray[i].PostalCode+"</td><td>"+jsArray[i].CenterLat+"</td><td>"+jsArray[i].CenterLong+"</td><td>"+jsArray[i].CommunitySite+"</td></tr>";
+                            }
+                            table += "</table>";
+
+                        viewTable.innerHTML = table;
+
+                    } else {
+                        alert("There was a problem with the request.");
+                    }
+                }
+
+
+            }
+            
+        </script>
+    </head>
+
+    <body>
+        <h2>The First Nations</h2>
+        
+        <div id="viewTable">
+        </div>
+
+        <input type="button" value="Make a request" onclick="makeRequest()" />
+    </body>
+</html>
